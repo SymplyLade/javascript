@@ -1,4 +1,6 @@
-// Shopping List Array Operations - Run in Console
+function addItem1(){
+
+    // Shopping List Array Operations - Run in Console
 // 1. Create an array with at least 5 items
 let shoppingList = ["Rice", "Cake", "Cookies", "Bread", "Noodles"];
 // 2. Function to add a new item to the end of the list
@@ -56,3 +58,5 @@ function runDemo() {
 }
 // RUN AUTOMATICALLY
 runDemo();
+
+}

@@ -1,4 +1,5 @@
-// Student Report System
+function addStudent1() {
+    // Student Report System
 // Array to store student data (objects with name + grade)
 let students = [];
 // 1. Add Student
@@ -58,3 +59,4 @@ addStudent("John", 72);
 addStudent("Alice", 88);
 addStudent("Opnex", 55);
 generateReport();
+}

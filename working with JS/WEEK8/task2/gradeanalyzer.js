@@ -1,4 +1,5 @@
-// Student Grades Analyzer - Console Version
+function getAverage1() {
+    // Student Grades Analyzer - Console Version
 // Store grades in an array
 let grades = [85, 92, 78, 60, 45, 72, 88, 95, 53, 67];
 // Function to calculate average grade
@@ -58,6 +59,7 @@ console.log("Average Grade:", getAverage(grades).toFixed(2));
 console.log("Highest Grade:", getHighest(grades));
 console.log("Lowest Grade:", getLowest(grades));
 console.log("Pass Rate:", getPassRate(grades).toFixed(2) + "%");
+}
 
 
 

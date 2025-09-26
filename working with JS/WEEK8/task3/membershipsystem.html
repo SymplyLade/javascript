@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Library Membership System</title>
+</head>
+<body>
+  <h1>Library Membership System</h1>
+  <div id="member-info"></div>
+  <div id="borrowed-books"></div>
+  <div id="borrowed-count"></div>
+  <div id="membership-type"></div>
+
+
+  
+  <script>
+    // Create member object
+ let member = {
+      name: "Gbemisola",
+      membershipType: "premium", // can be "basic" or "premium"
+      borrowedBooks: [],
+      // Method to borrow a book
+      borrowBook: function (book) {
+        this.borrowedBooks.push(book);
+      },
+      // Method to count borrowed books
+      getBorrowedCount: function () {
+        return this.borrowedBooks.length;
+      },
+      // Method to get membership info
+getMembershipInfo: function () {
+        if (this.membershipType === "premium") {
+          return this.name + " is a Premium member with access to unlimited books.";
+        } else {
+          return this.name + " is a Basic member with limited access.";
+        }
+      }
+    };
+    // Borrow some books
+    member.borrowBook("Oliver Twist");
+    member.borrowBook("The Return of the King");
+    member.borrowBook("War and Peace");
+
+
+
+
+// Display information on the page
+    document.getElementById("member-info").textContent =
+      "Member Name: " + member.name;
+    document.getElementById("borrowed-books").textContent =
+      "Borrowed Books: " + member.borrowedBooks.join(", ");
+    document.getElementById("borrowed-count").textContent =
+      "Books Borrowed Count: " + member.getBorrowedCount();
+    document.getElementById("membership-type").textContent =
+      member.getMembershipInfo();
+  </script>
+</body>
+       <style>
+        body{
+            background-color: bisque;
+            color: blueviolet;
+        }
+       </style>
+</html>

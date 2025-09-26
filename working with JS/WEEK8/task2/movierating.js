@@ -1,4 +1,5 @@
-// Step 1: Create arrays
+function addMovie1() {
+  // Step 1: Create arrays
 let movies = ["Home Alone", "My Demon", "Pyramid Game"];
 let ratings = [9, 8, 7];
 // Step 2: Add a new movie
@@ -29,7 +30,7 @@ function printSummary() {
 }
 // Challenge: Sort movies by rating (with styling)
 function sortMoviesByRating() {
-  console.log("Movies Sorted by Rating", "color: blue; background: crimson; font-size: 16px; padding: 4px;");
+  console.log("Movies Sorted by Rating",);
   let combined = movies.map((m, i) => ({ movie: m, rating: ratings[i] }));
   combined.sort((a, b) => b.rating - a.rating);
   combined.forEach(item => {
@@ -40,3 +41,4 @@ function sortMoviesByRating() {
 addMovie("Everybody Loves Jenifa", 10);
 printSummary();
 sortMoviesByRating();
+}
