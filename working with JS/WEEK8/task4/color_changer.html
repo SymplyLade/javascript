@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Color Changer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    p {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 10px;
+      color: rgba(231, 22, 137, 0.897);
+    }
+   
+  </style>
+</head>
+<body>
+  <p id="myText">Who sat and watch my infant head!</p>
+  <button onclick="changeColor()">Color Changer</button>
+  <script>
+    // List of preset colors
+    let textColors = ["red", "blue", "green", "purple", "orange"];
+    let bgColors   = ["yellow", "lightblue", "lightgreen", "pink", "beige"];
+    let index = 0; // start from first color
+    function changeColor() {
+      const text = document.getElementById("myText");
+      // change text color
+      text.style.color = textColors[index];
+      // change background color
+      document.body.style.backgroundColor = bgColors[index];
+      // move to the next color
+      index++;
+      // if we reach the end, start again
+      if (index >= textColors.length) {
+        index = 0;
+      }
+    }
+  </script>
+</body>
+</html>
