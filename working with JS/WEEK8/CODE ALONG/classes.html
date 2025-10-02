@@ -1,0 +1,96 @@
+<!-- # Day 7: Classes and Object-Oriented Programming Fundamentals
+
+## Learning Objectives
+By the end of this lesson, you will:
+- Understand why classes make code more organized and reusable
+- Create classes with properties and methods
+- Use constructors to initialize objects consistently
+- Apply inheritance to share code between related classes
+- Build a complete class-based system for your café project
+
+---
+
+## Why We Need Classes
+
+When building your café project, you might start by creating objects directly for each menu item.  
+For example, you may write code for a `coffee` object, a `sandwich` object, and a `cake` object.  
+But very quickly, you’ll notice problems:
+
+- **Lots of repetition** → Each object repeats the same methods (like `getDisplayInfo`, `updatePrice`).  
+- **Error-prone** → If you update one object’s method, you have to manually update all the others.  
+- **Inconsistent structure** → One item may have a property that another doesn’t, which causes bugs.  
+- **Hard to maintain** → As the menu grows, it becomes messy and unmanageable.  
+
+This is where **Classes** come in.  
+
+### What Are Classes?
+
+A **Class** is like a **blueprint** for creating objects.  
+Instead of writing the same code for every object, you define a **template** once, and then create multiple objects (instances) from it.  
+
+Think of it like:
+- A house blueprint (class) can be reused to build many houses (objects).  
+- Each house can have its own color, furniture, and style, but they all follow the same structure.  
+
+### Benefits of Using Classes
+- **Consistency** → Every object created from a class has the same properties and methods.  
+- **Reusability** → Define once, use many times.  
+- **Maintainability** → If you update the class, all future objects automatically benefit.  
+- **Professional structure** → This is the way real-world applications are built.  
+
+---
+
+## Key Concepts You’ll Learn
+1. **Class declaration** – how to define a class.  
+2. **Constructor** – a special method that runs when you create an object.  
+3. **Methods** – functions that belong to a class.  
+4. **The `this` keyword** – refers to the current object being used.  
+5. **Inheritance** – how one class can extend another and reuse its functionality.   
+
+With these, you’ll be able to transform your café project into a **well-structured, object-oriented system**. -->
+
+
+<!-- 
+## The Problem Classes Solve
+
+### Why We Need Classes -->
+
+<!-- From your café project, you might have written code like this:
+// Creating menu items the hard way - lots of repetition
+let coffee = {
+    id: 1,
+    name: "Coffee",
+    price: 3.50,
+    category: "Drinks",
+    getDisplayInfo: function() {
+        return `${this.name} - $${this.price}`;
+    },
+    updatePrice: function(newPrice) {
+        this.price = newPrice;
+    }
+};
+
+let sandwich = {
+    id: 2,
+    name: "Sandwich", 
+    price: 8.00,
+    category: "Food",
+    getDisplayInfo: function() {
+        return `${this.name} - $${this.price}`;  // Same code repeated!
+    },
+    updatePrice: function(newPrice) {           // Same code repeated!
+        this.price = newPrice;
+    }
+}; -->
+
+<!-- // And you'd repeat this for every menu item...
+
+
+**Problems with this approach:**
+- Lots of repeated code
+- Easy to make mistakes
+- Hard to maintain (if you change one method, you have to change it everywhere)
+- No guarantee all items have the same structure
+
+**Classes solve this by providing a template for creating similar objects.** -->
+
