@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 4</title>
+</head>
+<body>
+  <h1>Employee Management</h1>
+  <p>Product class with name and price</p>
+  <script>
+    // Base class
+    class Employee {
+      constructor(name, salary) {
+        this.name = name;
+        this.salary = salary;
+      }
+      // Show employee details
+      getDetails() {
+        return `Employee: ${this.name}, Salary: ₦${this.salary}`;
+      }
+      // Challenge method
+      isHighEarner() {
+        return this.salary > 100000;
+      }
+    }
+    // Subclass
+    class Manager extends Employee {
+      constructor(name, salary, department) {
+        super(name, salary);
+        this.department = department;
+      }
+      // Override method
+      getDetails() {
+        return `Manager: ${this.name}, Salary: ₦${this.salary}, Department: ${this.department}`;
+      }
+    }
+    // Testing
+    const emp1 = new Employee("Esther", 85000);
+    const emp2 = new Employee("Oyebade", 150000);
+    const manager1 = new Manager("Bukunmi", 200000, "Finance");
+    console.log("---- Employee Management ----");
+    console.log(emp1.getDetails(), "→ High Earner?", emp1.isHighEarner());
+    console.log(emp2.getDetails(), "→ High Earner?", emp2.isHighEarner());
+    console.log(manager1.getDetails(), "→ High Earner?", manager1.isHighEarner());
+  </script>
+</body>
+</html>

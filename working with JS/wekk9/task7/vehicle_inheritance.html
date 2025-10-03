@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Practice Exercise 3</title>
+</head>
+<body>
+  <h1>Vehicle Maintenance</h1>
+  <script>
+    class Vehicle {
+      constructor(brand, model, year) {
+        this.brand = brand;
+        this.model = model;
+        this.year = year;
+      }
+      getInfo() {
+        return `${this.brand} ${this.model} (${this.year})`;
+      }
+      isOld() {
+        let currentYear = new Date().getFullYear();
+        return (currentYear - this.year) > 10;
+      }
+    }
+    class Car extends Vehicle {
+      constructor(brand, model, year, fuelType) {
+        super(brand, model, year);
+        this.fuelType = fuelType;
+      }
+      getInfo() {
+        return `${this.brand} ${this.model} (${this.year}) - Fuel: ${this.fuelType}`;
+      }
+    }
+    // Testing
+    const car1 = new Car("Toyota", "Corolla", 2010, "Petrol");
+    const car2 = new Car("Tesla", "Model 3", 2022, "Electric");
+    console.log("---- Vehicle Info ----");
+    console.log(car1.getInfo(), "→ Is old?", car1.isOld());
+    console.log(car2.getInfo(), "→ Is old?", car2.isOld());
+  </script>
+</body>
+</html>

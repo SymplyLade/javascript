@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Class Console</title>
+</head>
+<body>
+  <h1>Book class with properties</h1>
+  <script>
+    // Define the Book class
+    class Book {
+      constructor(title, author, year, isBorrowed = false) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.isBorrowed = isBorrowed;
+      }
+      // Method to get a summary of the book
+      getSummary() {
+        return `Book: ${this.title} by ${this.author} (${this.year})`;
+      }
+    }
+    // Create Book objects
+    const book1 = new Book("Things Fall Apart", "Chinua Achebe", 1958);
+    const book2 = new Book("1984", "George Orwell", 1949);
+    // Log summaries to the console
+    console.log(book1.getSummary());
+    console.log(`Borrowed? ${book1.isBorrowed}`);
+    console.log(book2.getSummary());
+    console.log(`Borrowed? ${book2.isBorrowed}`);
+  </script>
+    <style>
+        body{
+            background-color: rgb(65, 50, 148);
+        }
+    </style>
+</body>
+</html>

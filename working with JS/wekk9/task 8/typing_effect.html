@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 2 - Typing Effect</title>
+</head>
+<body>
+  <h1>Typing Effect</h1>
+  <p id="typing"></p>
+  <button onclick="startTyping()">Start Typing</button>
+  <script>
+    let text = "Hello, this is a typing effect!";
+    let i = 0;
+    let interval;
+    function startTyping() {
+      i = 0;
+      document.getElementById("typing").textContent = "";
+      clearInterval(interval);
+      interval = setInterval(() => {
+        if (i < text.length) {
+          document.getElementById("typing").textContent += text.charAt(i);
+          console.log("Typed:", text.charAt(i));
+          i++;
+        } else {
+          clearInterval(interval);
+          console.log("Typing finished");
+          // Challenge: blinking effect
+          setInterval(() => {
+            let elem = document.getElementById("typing");
+            elem.style.visibility = (elem.style.visibility === "hidden") ? "visible" : "hidden";
+          }, 500);
+        }
+      }, 150);
+    }
+  </script>
+</body>
+</html>
