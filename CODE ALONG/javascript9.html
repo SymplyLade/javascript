@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+//     <!-- # Day 9: Asynchronous JavaScript - Simple Introduction
+
+// ## Learning Objectives
+// By the end of this lesson, you will:
+// - Understand what "asynchronous" means in JavaScript
+// - Use callback functions to handle delayed operations
+// - Work with Promises for cleaner asynchronous code
+// - Use async/await to make asynchronous code look synchronous
+// - Error handling with try and catch.
+
+// ---
+
+// ## The Problem
+
+// ### Imagine a Café
+
+// - The **chef** puts a pot of water on the stove. It takes **5 minutes to boil**.  
+// - If the chef just **stands there doing nothing**, that’s **synchronous** — he waits until the water is ready before doing anything else.  
+// - But if the chef **starts chopping vegetables or preparing another dish while the water boils**, that’s **asynchronous** — he can continue other work while waiting.  
+
+// Now add the **waiter**:  
+// - If the waiter **stops taking orders** until the water boils, customers get angry.  
+// - If the waiter **keeps serving customers while the water boils in the background**, the café runs smoothly.  
+
+// ---
+
+// ### How This Maps to JavaScript
+
+// - **Synchronous JavaScript**  
+//   Code runs **line by line**, and nothing else can happen until the current task finishes.  
+//   → Just like the chef standing still for 5 minutes.  
+
+// - **Asynchronous JavaScript**  
+//   Some tasks (like waiting for a timer, loading data, or fetching from a server) can run **in the background**.  
+//   Meanwhile, JavaScript continues with the next lines of code.  
+//   → Just like the chef chopping veggies while the water boils.  
+
+// ---
+
+// ### Why This Matters
+
+// - Without **asynchronous behavior**, websites would **freeze** while waiting for slow tasks (like loading data).  
+// - With **async**, the page **stays responsive** while those tasks finish later.   -->
+
+
+     //Synchronous vs Asynchronous
+    //SYNCHRONOUS (blocking) - Everything waits
+    console.log("Step1: Start cooking ");
+    //Simulate waiting 5 minutes (blocking loop)
+    for (let i = 0; i < 1e10; i++) {}
+
+    console.log("Step 2: Food ready");
+    console.log("Step 3: Serve customer");
+    // OUTPUT
+    console.log("Step 1; Start cooking");
+    console.log("Step 2: Wait 5 minutes.....");
+    console.log("Step 3: Food ready");
+    console.log("Step 4: Serve customer");
+
+    // ASYNCHRONOUS (NON-BLOCKING) - LIFE CONTINUES WHILE WAITING
+    console.log("Step 1: Start cooking ");
+    setTimeout( () => {
+        console.log("Step 3: Food ready after 5 minutes");
+    }, 5000);
+    console.log("Step 2: Serve other customers while waiting");
+    console.log("Step 4: Take more orders");
+//    **Output:**
+// ```
+// Step 1: Start cooking
+// Step 2: Serve other customers while waiting
+// Step 4: Take more orders
+// (5 seconds pass)
+// Step 3: Food ready after 5 minutes
+// ```
+
+// **Key Point:** Asynchronous code lets JavaScript do other things while waiting for slow operations. 
+
+// ## Callbacks - The First Way
+
+// ### What is a Callback?
+
+// A callback is a function you pass to another function to be called later.
+
+
+// Simple callback example
+function greetUser(name, callback) {
+    console.log("Hello, " + name);
+    callback(); // Call the function that was passed in
+}
+
+function sayGoodbye() {
+    console.log("Goodbye!");
+}
+
+// Pass sayGoodbye as a callback
+greetUser("Alice", sayGoodbye);
+
+// Output:
+// Hello, Alice
+// Goodbye!
+
+
+ //Callbacks with Asynchronous Operations
+
+// Simulate getting data from a server
+function getMenuItems(callback) {
+    console.log("Fetching menu items...");
+    
+    // Simulate 2 second delay
+    setTimeout(() => {
+        let menuItems = ["Coffee", "Sandwich", "Cake"];
+        callback(menuItems); // Call the callback with the data
+    }, 2000);
+}
+
+// Use the function
+getMenuItems(function(items) {
+    console.log("Got menu items:", items);
+});
+
+console.log("Doing other things while waiting...");
+
+// Output:
+// Fetching menu items...
+// Doing other things while waiting...
+// (2 seconds pass)
+// Got menu items: ["Coffee", "Sandwich", "Cake"]
+
+
+// Real Café Example
+
+
+// Simulate order processing with callbacks
+function placeOrder(orderDetails, successCallback, errorCallback) {
+    console.log("Processing order:", orderDetails);
+    
+    setTimeout(() => {
+        // Simulate success or failure
+        let orderSuccessful = Math.random() > 0.2; // 80% success rate
+        
+        if (orderSuccessful) {
+            successCallback({
+                orderId: 12345,
+                message: "Order placed successfully!"
+            });
+        } else {
+            errorCallback("Payment failed. Please try again.");
+        }
+    }, 2000);
+}
+
+// Use the function
+placeOrder(
+    { item: "Latte", quantity: 2 },
+    function(result) {
+        console.log("Success:", result.message);
+        console.log("Order ID:", result.orderId);
+    },
+    function(error) {
+        console.log("Error:", error);
+    }
+);
+
+
+//Callbacks are simple but can get messy with multiple operations (called "callback hell").**
+
+// ## Promises - A Better Way
+
+// ### What is a Promise?
+
+// A Promise represents a future value. It's like a receipt - you don't have your food yet, but you have a promise it will come.
+
+// **A Promise can be:**
+// - **Pending** - Waiting for the result
+// - **Fulfilled** - Got the result successfully
+// - **Rejected** - Something went wrong
+
+// ### Creating a Promise
+
+
+// Create a simple promise
+let myPromise = new Promise(function(resolve, reject) {
+    let success = true;
+    
+    if (success) {
+        resolve("Operation successful!"); // Promise fulfilled
+    } else {
+        reject("Operation failed!"); // Promise rejected
+    }
+});
+
+// Use the promise
+myPromise
+    .then(function(result) {
+        console.log("Success:", result);
+    })
+    .catch(function(error) {
+        console.log("Error:", error);
+    });
+
+// PIZZA ORDER EXAMPLE
+let pizzaOrder = new Promise((resolve, reject) => {
+    let ovenWorking = true; // Try changing this to false
+    
+    if (ovenWorking) {
+        resolve("Your pizza is ready 🍕"); // Fulfilled
+    } else {
+        reject("Sorry, the oven broke 😢"); // Rejected
+    }
+});
+
+// Use the promise
+pizzaOrder
+    .then(message => {
+        console.log("Success:", message);
+    })
+    .catch(error => {
+        console.log("Error:", error);
+    });
+
+// Promise with Delay
+
+
+function getMenuItems() {
+    return new Promise(function(resolve, reject) {
+        console.log("Fetching menu items...");
+        
+        setTimeout(() => {
+            let menuItems = ["Coffee", "Sandwich", "Cake"];
+            resolve(menuItems); // Success!
+        }, 2000);
+    });
+}
+
+// Use the promise
+getMenuItems()
+    .then(function(items) {
+        console.log("Got items:", items);
+    })
+    .catch(function(error) {
+        console.log("Error:", error);
+    });
+
+console.log("This runs while waiting...");
+
+
+// ## Async/Await - The Easiest Way
+
+// ### What is Async/Await?
+
+// Async/await makes asynchronous code look like regular synchronous code. It's built on top of Promises but much easier to read.
+
+// ### Basic Async/Await
+
+
+// Function that returns a promise
+function getMenuItems() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(["Coffee", "Sandwich", "Cake"]);
+        }, 2000);
+    });
+}
+
+// Traditional promise way
+getMenuItems().then(items => {
+    console.log("Items:", items);
+});
+
+// Async/await way (cleaner!)
+async function displayMenu() {
+    console.log("Fetching menu...");
+    
+    let items = await getMenuItems(); // Wait for the promise
+    
+    console.log("Items:", items);
+}
+
+displayMenu();
+
+
+//**The `await` keyword makes JavaScript wait for the Promise to finish before continuing.**
+
+
+//### Multiple Async Operations
+
+
+function getMenuItems() {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve(["Coffee", "Sandwich"]), 1000);
+    });
+}
+
+function checkStock(items) {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve({ items, inStock: true }), 1000);
+    });
+}
+
+function calculatePrice(stockInfo) {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve({ ...stockInfo, total: 12.50 }), 1000);
+    });
+}
+
+// Using async/await - much cleaner!
+async function processOrder() {
+    console.log("Starting order...");
+    
+    let items = await getMenuItems();
+    console.log("Got items:", items);
+    
+    let stockInfo = await checkStock(items);
+    console.log("Checked stock:", stockInfo);
+    
+    let finalOrder = await calculatePrice(stockInfo);
+    console.log("Final order:", finalOrder);
+    
+    return finalOrder;
+}
+
+// Call the async function
+processOrder();
+
+//## Error Handling with Try/Catch
+
+
+function placeOrder(orderDetails) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            let success = Math.random() > 0.3;
+            
+            if (success) {
+                resolve({ orderId: 12345, status: "confirmed" });
+            } else {
+                reject("Payment failed");
+            }
+        }, 2000);
+    });
+}
+a
+async function submitOrder() {
+    try {
+        console.log("Placing order...");
+        
+        let result = await placeOrder({ item: "Latte" });
+        
+        console.log("Success! Order ID:", result.orderId);
+        
+    } catch (error) {
+        console.log("Error:", error);
+    }
+}
+
+submitOrder();
+
+
+//**Try/catch works just like regular error handling - much simpler than promise .catch()!**.
+
+
+</script>
+</body>
+</html>

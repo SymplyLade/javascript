@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const orders = ["Coffee", "Cake", "Juice"];
+async function processOrders() {
+    for (const order of orders) {
+        console.log(`Processing ${order}...`);
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        console.log(`${order} processed.`);
+    }
+}
+// Test
+processOrders();
+    </script>
+</body>
+</html>

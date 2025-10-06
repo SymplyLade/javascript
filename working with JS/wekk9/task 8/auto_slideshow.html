@@ -5,20 +5,74 @@
   <title>Exercise 1 - Auto Slideshow</title>
 </head>
 <body>
+   <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #98569e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    #slideshow {
+      width: 300px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      border: 4px solid #ddd;
+      transition: transform 0.5s ease;
+    }
+
+    #slideshow:hover {
+      transform: scale(1.02);
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #3498db;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #460523;
+    }
+
+    .controls {
+      margin-top: 20px;
+    }
+  </style>
+
   <h1>Auto Slideshow</h1>
-  <img id="slideshow" src="A" width="200">
-  <br><br>
-  <button onclick="pauseSlideshow()">Pause</button>
-  <button onclick="resumeSlideshow()">Resume</button>
+  <img id="slideshow" src="image/IMG_1425.JPG" alt="Slideshow Image">
+  
+  <div class="controls">
+    <button onclick="pauseSlideshow()">Pause</button>
+    <button onclick="resumeSlideshow()">Resume</button>
+  </div>
+
   <script>
     let images = [
-      "https://via.placeholder.com/200x120?text=Image+1",
-      "https://via.placeholder.com/200x120?text=Image+2",
-      "https://via.placeholder.com/200x120?text=Image+3",
-      "https://via.placeholder.com/200x120?text=Image+4"
+      "image/IMG_9021.JPG",
+      "image/IMG_0702.jpg",
+      "image/266183.jpg",
+      "image/car_1.webp"
     ];
     let index = 0;
     let interval;
+
     function startSlideshow() {
       interval = setInterval(() => {
         index = (index + 1) % images.length;
@@ -26,16 +80,21 @@
         console.log("Showing:", images[index]);
       }, 2000);
     }
+
     function pauseSlideshow() {
       clearInterval(interval);
       console.log("Slideshow paused");
     }
+
     function resumeSlideshow() {
+      clearInterval(interval); // avoid duplicate intervals
       startSlideshow();
       console.log("Slideshow resumed");
     }
+
     // Start immediately
     startSlideshow();
   </script>
+ 
 </body>
 </html>

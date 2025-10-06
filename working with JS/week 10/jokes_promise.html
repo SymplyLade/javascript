@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- 
+## 🎯 Practice Exercise 1
+**Task:** Tell a delayed joke with Promises. 
+ 
+- Write a function `tellJoke()` that returns a Promise.  
+- After 3 seconds, resolve with `"😂 Here’s a funny joke!"`.  
+- Test it using `.then()`.  -->
+
+
+    <script>
+        function delayedJoke() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve("😂Here's a funny joke!");
+        }, 3000);
+    });
+}
+// Test with .then()
+delayedJoke().then((joke) => {
+    console.log(joke);
+});
+    </script>
+</body>
+</html>

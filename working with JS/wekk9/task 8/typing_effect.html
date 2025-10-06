@@ -3,34 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <title>Exercise 2 - Typing Effect</title>
+  <style>
+    /* Reset and base styling */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to right, #dbe6f6, #c5796d);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    #typing {
+      font-size: 20px;
+      color: #444;
+      min-height: 30px;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      white-space: pre-wrap;
+      transition: visibility 0.3s ease;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #470913;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 25px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      #typing {
+        font-size: 18px;
+      }
+
+      button {
+        width: 100%;
+        font-size: 15px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Typing Effect</h1>
-  <p id="typing"></p>
-  <button onclick="startTyping()">Start Typing</button>
+  <div class="container">
+    <h1>Typing Effect</h1>
+    <p id="typing"></p>
+    <button onclick="startTyping()">Start Typing</button>
+  </div>
+
   <script>
-    let text = "Hello, this is a typing effect!";
+    let text = "Hello, Welcome to JavaScript Timer!";
     let i = 0;
     let interval;
+    let blinkInterval;
+
     function startTyping() {
+      // Reset everything
       i = 0;
-      document.getElementById("typing").textContent = "";
       clearInterval(interval);
+      clearInterval(blinkInterval);
+      const typingElem = document.getElementById("typing");
+      typingElem.style.visibility = "visible";
+      typingElem.textContent = "";
+
+      // Typing logic
       interval = setInterval(() => {
         if (i < text.length) {
-          document.getElementById("typing").textContent += text.charAt(i);
+          typingElem.textContent += text.charAt(i);
           console.log("Typed:", text.charAt(i));
           i++;
         } else {
           clearInterval(interval);
           console.log("Typing finished");
-          // Challenge: blinking effect
-          setInterval(() => {
-            let elem = document.getElementById("typing");
-            elem.style.visibility = (elem.style.visibility === "hidden") ? "visible" : "hidden";
+
+          // Start blinking effect after typing
+          blinkInterval = setInterval(() => {
+            typingElem.style.visibility = 
+              typingElem.style.visibility === "hidden" ? "visible" : "hidden";
           }, 500);
         }
-      }, 150);
+      }, 300);
     }
   </script>
 </body>
